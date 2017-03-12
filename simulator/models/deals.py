@@ -3,8 +3,8 @@ from .owners import Owner
 
 
 class Deal(models.Model):
-    vendor = models.ForeignKey(Owner, on_delete=models.PROTECT)
-    customer = models.ForeignKey(Owner, on_delete=models.PROTECT)
+    vendor = models.ForeignKey(Owner, on_delete=models.PROTECT, related_name='vendor')
+    customer = models.ForeignKey(Owner, on_delete=models.PROTECT, related_name='customer')
     price = models.PositiveIntegerField()
 
 
