@@ -18,7 +18,7 @@ class PhysicalEntity(Owner):
     second_name = models.CharField(max_length=100)
     third_name = models.CharField(max_length=100, blank=True, default='')
     gender = models.CharField(choices=GENDER, max_length=1)
-    age = models.CharField(max_length=3, blank=True, default='', validators=[digit_regex])
+    birth_date = models.DateField()
     passport_series = models.CharField(max_length=4, validators=[digit_regex])
     passport_number = models.CharField(max_length=6, validators=[digit_regex])
     passport_issued_date = models.DateField()
