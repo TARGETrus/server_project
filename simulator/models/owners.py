@@ -18,10 +18,10 @@ class PhysicalEntity(Owner):
     second_name = models.CharField(max_length=100)
     third_name = models.CharField(max_length=100, blank=True, default='')
     gender = models.CharField(choices=GENDER, max_length=1)
-    birth_date = models.DateField()
+    birth_date = models.DateField(null=True)
     passport_series = models.CharField(max_length=4, validators=[digit_regex])
     passport_number = models.CharField(max_length=6, validators=[digit_regex])
-    passport_issued_date = models.DateField()
+    passport_issued_date = models.DateField(null=True)
 
 
 class LegalEntity(Owner):

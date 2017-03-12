@@ -12,4 +12,5 @@ class Flat(models.Model):
     flat_type = models.CharField(choices=FLAT_TYPE, max_length=1)
     description = models.TextField()
     for_rent = models.BooleanField(default=False)
+    per_room_basis = models.BooleanField(default=False)
     new_build = models.BooleanField(default=False)
