@@ -4,9 +4,7 @@ from rest_framework.reverse import reverse
 from rest_framework import generics, permissions, renderers
 from django.contrib.auth.models import User
 from simulator.models.snippets import Snippet
-from simulator.models.owners import PhysicalEntity, LegalEntity
 from simulator.serializers.serializers import SnippetSerializer, UserSerializer
-from simulator.serializers.ownersserializer import PhysicalEntitySerializer, LegalEntitySerializer
 from simulator.permissions import IsOwnerOrReadOnly
 
 
@@ -43,22 +41,6 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-
-
-class PhysicalEntityList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-    http_method_names = ['get', 'post']
-
-    queryset = PhysicalEntity.objects.all()
-    serializer_class = PhysicalEntitySerializer
-
-
-class LegalEntityList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
-    http_method_names = ['get', 'post']
-
-    queryset = LegalEntity.objects.all()
-    serializer_class = LegalEntitySerializer
 
 
 class SnippetHighlight(generics.GenericAPIView):
