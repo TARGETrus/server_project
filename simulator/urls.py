@@ -22,7 +22,13 @@ urlpatterns = format_suffix_patterns([
         name='user-list'),
     url(r'^users/(?P<pk>[0-9]+)/$',
         views.UserDetail.as_view(),
-        name='user-detail')
+        name='user-detail'),
+    url(r'^physical-entities/$',
+        views.PhysicalEntityList.as_view(),
+        name='physical-entities-list'),
+    url(r'^legal-entities/$',
+        views.LegalEntityList.as_view(),
+        name='legal-entities-list'),
 ])
 
 urlpatterns += [
