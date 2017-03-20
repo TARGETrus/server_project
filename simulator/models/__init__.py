@@ -1,11 +1,5 @@
-from .deals import Deal
-from .deals import Sale
-from .deals import Rent
-from .owners import Owner
-from .owners import PhysicalEntity
-from .owners import LegalEntity
+from .deals import Deal, Sale, Rent
+from .owners import Owner, PhysicalEntity, LegalEntity
 from .prices import Price
-from .realestate import RealEstate
-from .realestate import Flat
-from .realestate import Room
+from .realestate import RealEstate, Flat, Room
 from .snippets import Snippet
