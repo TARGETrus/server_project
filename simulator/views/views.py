@@ -15,8 +15,8 @@ def api_root(request, format=None):
         'snippets': reverse('snippet-list', request=request, format=format),
         'physical_entities': reverse('physical-entity-list', request=request, format=format),
         'legal_entities': reverse('legal-entity-list', request=request, format=format),
-        'flats': reverse('flat-list', request=request, format=format),
-        'rooms': reverse('room-list', request=request, format=format)
+        # 'flats': reverse('flat-list', request=request, format=format),
+        # 'rooms': reverse('room-list', request=request, format=format)
     })
 
 
