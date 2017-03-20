@@ -1,5 +1,5 @@
 from simulator.models.snippets import Snippet
-from simulator.serializers import SnippetSerializer, UserSerializer
+from simulator.serializers.serializers import SnippetSerializer, UserSerializer
 from simulator.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
