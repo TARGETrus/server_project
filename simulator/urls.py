@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.schemas import get_schema_view
-from simulator.views import views, realestateviews
+from simulator.views import views, ownersviews
 
 schema_view = get_schema_view(title='Pastebin API')
 
@@ -24,10 +24,10 @@ urlpatterns = format_suffix_patterns([
         views.UserDetail.as_view(),
         name='user-detail'),
     url(r'^physical-entities/$',
-        realestateviews.PhysicalEntityList.as_view(),
+        ownersviews.PhysicalEntityList.as_view(),
         name='physical-entities-list'),
     url(r'^legal-entities/$',
-        realestateviews.LegalEntityList.as_view(),
+        ownersviews.LegalEntityList.as_view(),
         name='legal-entities-list'),
 ])
 
