@@ -13,8 +13,10 @@ def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
         'snippets': reverse('snippet-list', request=request, format=format),
-        'physicals': reverse('physical-entities-list', request=request, format=format),
-        'legals': reverse('legal-entities-list', request=request, format=format)
+        'physical_entities': reverse('physical-entity-list', request=request, format=format),
+        'legal_entities': reverse('legal-entity-list', request=request, format=format),
+        'flats': reverse('flat-list', request=request, format=format),
+        'rooms': reverse('room-list', request=request, format=format)
     })
 
 
