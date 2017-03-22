@@ -5,7 +5,7 @@ from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
 class OwnerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Owner
-        fields = ('id', 'phone_number', 'address_actual', 'address_registered')
+        fields = ('id', 'phone_number', 'address_actual', 'address_registered', 'real_estate_property')
 
 
 class PhysicalEntitySerializer(OwnerSerializer):
