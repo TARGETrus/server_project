@@ -14,7 +14,7 @@ ROOM_TYPE = (
 
 
 class RealEstate(models.Model):
-    owner = models.ForeignKey(Owner, on_delete=models.PROTECT)
+    owner = models.ForeignKey(Owner, related_name='real_estate_property', on_delete=models.PROTECT)
     for_rent = models.BooleanField(default=False)
 
 
