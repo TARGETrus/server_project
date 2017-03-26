@@ -5,7 +5,7 @@ from simulator.models.realestate import RealEstate, Flat, Room
 class RealEstateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = RealEstate
-        fields = ('id', 'owner', 'for_rent')
+        fields = ('url', 'id', 'owner', 'for_rent')
 
 
 class FlatSerializer(RealEstateSerializer):
