@@ -1,19 +1,28 @@
 from django.db import models
-from .owners import Owner
+from simulator.models.owners import Owner
+from simulator.utils.enums import RealEstateType, FlatType, RoomType
 
-FLAT_TYPE = (
-    ('R', 'Regular'),
-    ('S', 'Studio')
-)
+REAL_ESTATE_TYPE = {
+    (RealEstateType.REAL_ESTATE.value, 'RealEstate'),
+    (RealEstateType.FLAT.value, 'Flat'),
+    (RealEstateType.ROOM.value, 'Room')
+}
 
-ROOM_TYPE = (
-    ('B', 'Bathroom'),
-    ('K', 'Kitchen'),
-    ('L', 'Living Room')
-)
+FLAT_TYPE = {
+    (FlatType.REGULAR.value, 'Regular'),
+    (FlatType.STUDIO.value, 'Studio')
+}
+
+ROOM_TYPE = {
+    (RoomType.BATHROOM.value, 'Bathroom'),
+    (RoomType.KITCHEN.value, 'Kitchen'),
+    (RoomType.LIVING_ROOM.value, 'Living Room')
+}
 
 
 class RealEstate(models.Model):
+    real_estate_type = models.CharField(choices=REAL_ESTATE_TYPE, max_length=1,
+                                        default=RealEstateType.REAL_ESTATE.value)
     owner = models.ForeignKey(Owner, related_name='real_estate_property', on_delete=models.PROTECT)
     for_rent = models.BooleanField(default=False)
 

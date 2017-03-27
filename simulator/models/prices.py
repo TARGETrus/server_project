@@ -1,9 +1,10 @@
 from django.db import models
-from .realestate import RealEstate
+from simulator.models.realestate import RealEstate
+from simulator.utils.enums import PriceType
 
 PRICE_TYPE = (
-    ('R', 'Rent'),
-    ('S', 'Sale')
+    (PriceType.RENT.value, 'Rent'),
+    (PriceType.SALE.value, 'Sale')
 )
 
 

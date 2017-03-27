@@ -1,5 +1,5 @@
 from django.db import models
-from .owners import Owner
+from simulator.models.owners import Owner
 
 
 class Deal(models.Model):
