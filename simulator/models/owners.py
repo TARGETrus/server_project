@@ -31,7 +31,15 @@ class PhysicalEntity(Owner):
     passport_number = models.CharField(max_length=6, validators=[digit_regex])
     passport_issued_date = models.DateField(null=True)
 
+    def save(self, *args, **kwargs):
+        self.owner_class_type = OwnerClass.PHYSICAL_ENTITY.value
+        super(PhysicalEntity, self).save(*args, **kwargs)
+
 
 class LegalEntity(Owner):
     company_name = models.CharField(max_length=100)
     inn = models.CharField(max_length=12, blank=True, default='', validators=[digit_regex])
+
+    def save(self, *args, **kwargs):
+        self.owner_class_type = OwnerClass.LEGAL_ENTITY.value
+        super(LegalEntity, self).save(*args, **kwargs)

@@ -33,8 +33,16 @@ class Flat(RealEstate):
     per_room_basis = models.BooleanField(default=False)
     new_build = models.BooleanField(default=False)
 
+    def save(self, *args, **kwargs):
+        self.owner_class_type = RealEstateClass.FLAT.value
+        super(Flat, self).save(*args, **kwargs)
+
 
 class Room(RealEstate):
     parent_flat = models.ForeignKey(Flat, on_delete=models.PROTECT)
     room_type = models.CharField(choices=ROOM_TYPE, max_length=1)
     square = models.SmallIntegerField()
+
+    def save(self, *args, **kwargs):
+        self.owner_class_type = RealEstateClass.ROOM.value
+        super(Room, self).save(*args, **kwargs)
