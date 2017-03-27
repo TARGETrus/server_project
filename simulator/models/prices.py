@@ -1,4 +1,5 @@
 from django.db import models
+
 from simulator.models.realestate import RealEstate
 from simulator.utils.enums import PriceType
 

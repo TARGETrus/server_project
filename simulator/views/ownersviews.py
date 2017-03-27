@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+
 from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
 from simulator.serializers.ownersserializers import OwnerSerializer, PhysicalEntitySerializer, LegalEntitySerializer
 

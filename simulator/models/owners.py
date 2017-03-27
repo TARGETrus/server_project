@@ -1,4 +1,5 @@
 from django.db import models
+
 from simulator.utils.enums import OwnerClass, OwnerGender
 from simulator.utils.validators import digit_regex
 

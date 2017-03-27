@@ -1,4 +1,5 @@
 from django.db import models
+
 from simulator.models.owners import Owner
 
 
