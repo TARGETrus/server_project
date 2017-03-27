@@ -1,9 +1,10 @@
 from django.db import models
 from simulator.utils.validators import digit_regex
+from simulator.utils.enums import OwnerGender
 
 GENDER = (
-    ('M', 'Male'),
-    ('F', 'Female')
+    (OwnerGender.MALE.value, 'Male'),
+    (OwnerGender.FEMALE.value, 'Female')
 )
 
 
