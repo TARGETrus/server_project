@@ -34,7 +34,7 @@ class Flat(RealEstate):
     new_build = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        self.owner_class_type = RealEstateClass.FLAT.value
+        self.real_estate_class_type = RealEstateClass.FLAT.value
         super(Flat, self).save(*args, **kwargs)
 
 
@@ -44,5 +44,5 @@ class Room(RealEstate):
     square = models.SmallIntegerField()
 
     def save(self, *args, **kwargs):
-        self.owner_class_type = RealEstateClass.ROOM.value
+        self.real_estate_class_type = RealEstateClass.ROOM.value
         super(Room, self).save(*args, **kwargs)

@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
+from simulator.serializers.ownersfields import OwnersHyperlinkField
 
 
 class OwnerSerializer(serializers.HyperlinkedModelSerializer):
-    real_estate_property = serializers.HyperlinkedRelatedField(view_name='realestate-detail', many=True, read_only=True)
+    real_estate_property = OwnersHyperlinkField(view_name='realestate-detail', many=True, read_only=True)
 
     class Meta:
         model = Owner
