@@ -1,13 +1,19 @@
 from enum import Enum
 
 
+class OwnerClass(Enum):
+    OWNER = 'O'
+    PHYSICAL_ENTITY = 'P'
+    LEGAL_ENTITY = 'L'
+
+
 class OwnerGender(Enum):
     MALE = 'M'
     FEMALE = 'F'
 
 
-class RealEstateType(Enum):
-    REAL_ESTATE = 'B'
+class RealEstateClass(Enum):
+    REAL_ESTATE = 'E'
     FLAT = 'F'
     ROOM = 'R'
 

@@ -1,6 +1,12 @@
 from django.db import models
 from simulator.utils.validators import digit_regex
-from simulator.utils.enums import OwnerGender
+from simulator.utils.enums import OwnerClass, OwnerGender
+
+OWNER_CLASS = (
+    (OwnerClass.OWNER.value, 'Owner'),
+    (OwnerClass.PHYSICAL_ENTITY.value, 'PhysicalEntity'),
+    (OwnerClass.LEGAL_ENTITY.value, 'LegalEntity')
+)
 
 GENDER = (
     (OwnerGender.MALE.value, 'Male'),
@@ -9,6 +15,7 @@ GENDER = (
 
 
 class Owner(models.Model):
+    owner_class_type = models.CharField(choices=OWNER_CLASS, max_length=1, default=OwnerClass.OWNER.value)
     phone_number = models.CharField(max_length=15, validators=[digit_regex])
     address_actual = models.CharField(max_length=200)
     address_registered = models.CharField(max_length=200)
