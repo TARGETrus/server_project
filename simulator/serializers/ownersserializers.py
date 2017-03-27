@@ -1,6 +1,7 @@
 from rest_framework import serializers
+
 from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
-from simulator.serializers.ownersfields import OwnersHyperlinkField
+from simulator.serializers.fields.ownersfields import OwnersHyperlinkField
 
 
 class OwnerSerializer(serializers.HyperlinkedModelSerializer):

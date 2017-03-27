@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from simulator.models.owners import PhysicalEntity, LegalEntity
 from simulator.utils.enums import OwnerClass
 

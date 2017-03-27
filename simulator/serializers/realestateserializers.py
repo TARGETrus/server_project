@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from simulator.models.realestate import RealEstate, Flat, Room
+
 from simulator.models.owners import Owner
-from simulator.serializers.realestatefields import RealEstateHyperlinkField
+from simulator.models.realestate import RealEstate, Flat, Room
+from simulator.serializers.fields.realestatefields import RealEstateHyperlinkField
 
 
 class RealEstateSerializer(serializers.HyperlinkedModelSerializer):
