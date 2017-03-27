@@ -37,6 +37,4 @@ class RealEstateHyperlinkField(serializers.HyperlinkedRelatedField):
             'pk': obj.pk
         }
 
-        print(type(obj))
-
         return self.reverse(view_name, kwargs=url_kwargs, request=request, format=format)

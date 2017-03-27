@@ -40,7 +40,7 @@ class Flat(RealEstate):
 
 
 class Room(RealEstate):
-    parent_flat = models.ForeignKey(Flat, on_delete=models.PROTECT)
+    parent_flat = models.ForeignKey(Flat, related_name='rooms', on_delete=models.PROTECT)
     room_type = models.CharField(choices=ROOM_TYPE, max_length=1)
     square = models.SmallIntegerField()
 

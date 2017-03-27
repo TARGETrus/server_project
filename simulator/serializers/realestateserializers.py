@@ -14,9 +14,11 @@ class RealEstateSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class FlatSerializer(RealEstateSerializer):
+    rooms = serializers.HyperlinkedRelatedField(view_name='room-detail', many=True, read_only=True)
+
     class Meta(RealEstateSerializer.Meta):
         model = Flat
-        fields = RealEstateSerializer.Meta.fields + ('description', 'flat_type', 'per_room_basis', 'new_build')
+        fields = RealEstateSerializer.Meta.fields + ('description', 'flat_type', 'per_room_basis', 'new_build', 'rooms')
 
 
 class RoomSerializer(RealEstateSerializer):
