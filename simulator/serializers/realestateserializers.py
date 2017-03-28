@@ -2,11 +2,11 @@ from rest_framework import serializers
 
 from simulator.models.owners import Owner
 from simulator.models.realestate import RealEstate, Flat, Room
-from simulator.serializers.fields.realestatefields import RealEstateHyperlinkField
+from simulator.serializers.fields.ownersfields import OwnersHyperlinkField
 
 
 class RealEstateSerializer(serializers.HyperlinkedModelSerializer):
-    owner = RealEstateHyperlinkField(view_name='owner-detail', queryset=Owner.objects.all())
+    owner = OwnersHyperlinkField(view_name='owner-detail', queryset=Owner.objects.all())
 
     class Meta:
         model = RealEstate
