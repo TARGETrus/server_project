@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from simulator.models.owners import PhysicalEntity, LegalEntity
 from simulator.utils.enums import OwnerClass
 
 
@@ -28,13 +27,33 @@ class OwnersHyperlinkField(serializers.HyperlinkedRelatedField):
 
         if obj.owner_class_type == OwnerClass.PHYSICAL_ENTITY.value:
             view_name = 'physicalentity-detail'
-            queryset = PhysicalEntity.objects.all()
         elif obj.owner_class_type == OwnerClass.LEGAL_ENTITY.value:
             view_name = 'legalentity-detail'
-            queryset = LegalEntity.objects.all()
 
         url_kwargs = {
             'pk': obj.pk
         }
 
         return self.reverse(view_name, kwargs=url_kwargs, request=request, format=format)
+
+    def get_object(self, view_name, view_args, view_kwargs):
+        lookup_kwargs = {
+            'pk': view_kwargs['pk']
+        }
+        return self.get_queryset().get(**lookup_kwargs)
+
+    def to_internal_value(self, data):
+        """
+        Terrible solution. I should find something better.
+
+        :param data: incoming url.
+        :return: see overridden method.
+        """
+        if 'physical-entities' in data:
+            self.view_name = 'physicalentity-detail'
+        elif 'legal-entities' in data:
+            self.view_name = 'legalentity-detail'
+        super(OwnersHyperlinkField, self).to_internal_value(data)
+
+    def display_value(self, instance):
+        return '%s: %s' % (instance.owner_class_type, instance.pk)
