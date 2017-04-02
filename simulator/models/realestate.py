@@ -25,8 +25,8 @@ class RealEstate(models.Model):
     real_estate_class_type = models.CharField(choices=REAL_ESTATE_CLASS, max_length=1, editable=False,
                                               default=RealEstateClass.REAL_ESTATE.value)
     owner = models.ForeignKey(Owner, related_name='real_estate_property', on_delete=models.PROTECT)
-    description = models.TextField()
     for_rent = models.BooleanField(default=False)
+    description = models.TextField()
 
 
 class Flat(RealEstate):
