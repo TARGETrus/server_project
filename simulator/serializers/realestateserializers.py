@@ -18,7 +18,8 @@ class FlatSerializer(RealEstateSerializer):
 
     class Meta(RealEstateSerializer.Meta):
         model = Flat
-        fields = RealEstateSerializer.Meta.fields + ('description', 'flat_type', 'per_room_basis', 'new_build', 'rooms')
+        fields = RealEstateSerializer.Meta.fields + ('description', 'floor', 'flat_type', 'per_room_basis', 'new_build',
+                                                     'rooms')
 
 
 class RoomSerializer(RealEstateSerializer):

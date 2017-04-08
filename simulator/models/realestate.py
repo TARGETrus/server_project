@@ -2,6 +2,7 @@ from django.db import models
 
 from simulator.models.owners import Owner
 from simulator.utils.enums import RealEstateClass, FlatType, RoomType
+from simulator.utils.validators import digit_regex
 
 REAL_ESTATE_CLASS = {
     (RealEstateClass.REAL_ESTATE.value, 'RealEstate'),
@@ -31,6 +32,7 @@ class RealEstate(models.Model):
 
 class Flat(RealEstate):
     flat_type = models.CharField(choices=FLAT_TYPE, max_length=1)
+    floor = models.CharField(max_length=3, validators=[digit_regex])
     per_room_basis = models.BooleanField(default=False)
     new_build = models.BooleanField(default=False)
 
@@ -40,9 +42,9 @@ class Flat(RealEstate):
 
 
 class Room(RealEstate):
-    parent_flat = models.ForeignKey(Flat, related_name='rooms', on_delete=models.PROTECT)
     room_type = models.CharField(choices=ROOM_TYPE, max_length=1)
     square = models.SmallIntegerField()
+    parent_flat = models.ForeignKey(Flat, related_name='rooms', on_delete=models.PROTECT)
 
     def save(self, *args, **kwargs):
         self.real_estate_class_type = RealEstateClass.ROOM.value
