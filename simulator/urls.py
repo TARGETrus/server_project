@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.schemas import get_schema_view
 
-from simulator.views import views, ownersviews, realestateviews, pricesviews
+from simulator.views import views, ownersviews, realestateviews, pricesviews, dealsviews
 
 schema_view = get_schema_view(title='Pastebin API')
 
@@ -33,6 +33,18 @@ urlpatterns = format_suffix_patterns([
     url(r'^rooms/(?P<pk>[0-9]+)/$',
         realestateviews.RoomDetail.as_view(),
         name='room-detail'),
+    url(r'^sales/$',
+        dealsviews.SaleList.as_view(),
+        name='sale-list'),
+    url(r'^sales/(?P<pk>[0-9]+)/$',
+        dealsviews.SaleDetail.as_view(),
+        name='sale-detail'),
+    url(r'^rents/$',
+        dealsviews.RentList.as_view(),
+        name='rent-list'),
+    url(r'^rents/(?P<pk>[0-9]+)/$',
+        dealsviews.RentDetail.as_view(),
+        name='rent-detail'),
     url(r'^prices/$',
         pricesviews.PriceList.as_view(),
         name='price-list'),

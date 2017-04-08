@@ -10,5 +10,7 @@ def api_root(request, format=None):
         'legal_entities': reverse('legalentity-list', request=request, format=format),
         'flats': reverse('flat-list', request=request, format=format),
         'rooms': reverse('room-list', request=request, format=format),
+        'sales': reverse('sale-list', request=request, format=format),
+        'rents': reverse('rent-list', request=request, format=format),
         'prices': reverse('price-list', request=request, format=format)
     })
