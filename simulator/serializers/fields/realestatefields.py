@@ -1,28 +1,48 @@
 from rest_framework import serializers
+from django.core.exceptions import ObjectDoesNotExist
 
-from simulator.utils.enums import RealEstateClass
+from simulator.utils.structures import HashDict
 
 
-class RealEstateHyperlinkField(serializers.HyperlinkedRelatedField):
+class RealEstateRelatedField(serializers.RelatedField):
 
-    def get_url(self, obj, view_name, request, format):
+    default_error_messages = {
+        'does_not_exist': 'Invalid pk "{pk_value}" - object does not exist.',
+        'incorrect_type': 'Incorrect type, received {data_type}.'
+    }
+
+    def to_internal_value(self, incoming):
         """
-        Overriding this method lets us set valid view_name and queryset, depending on handled object type field.
+        Queryset with the instance we will store.
 
-        :param obj: RealEstate (or inheriting) model object.
-        :param view_name: name of the specific RealEstate view.
-        :param request: incoming request.
-        :param format: url format.
-        :return: modified data.
+        :param incoming: instance with incoming data.
+        :return: queryset.
         """
+        try:
+            return self.get_queryset().get(pk=incoming)
+        except ObjectDoesNotExist:
+            self.fail('does_not_exist', pk_value=incoming)
+        except (TypeError, ValueError):
+            self.fail('incorrect_type', data_type=type(incoming).__name__)
 
-        if obj.real_estate_class_type == RealEstateClass.FLAT.value:
-            view_name = 'flat-detail'
-        elif obj.real_estate_class_type == RealEstateClass.ROOM.value:
-            view_name = 'room-detail'
+    def to_representation(self, outgoing):
+        """
+        Custom HashDict() is used to satisfy django and get dict on view instead of simple String.
 
-        url_kwargs = {
-            'pk': obj.pk
-        }
+        :param outgoing: instance we will take data from.
+        :return: instance we will send with outgoing's data.
+        """
+        result = HashDict()
+        result['id'] = outgoing.pk
+        result['object_type'] = outgoing.real_estate_class_type
 
-        return self.reverse(view_name, kwargs=url_kwargs, request=request, format=format)
+        return result
+
+    def display_value(self, instance):
+        """
+        Defines what choices user will see on view's form select element.
+
+        :param instance: instance object with data
+        :return: string with select's choice.
+        """
+        return 'RealEstateID: %s' % instance.id

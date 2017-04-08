@@ -1,59 +1,48 @@
 from rest_framework import serializers
+from django.core.exceptions import ObjectDoesNotExist
 
-from simulator.utils.enums import OwnerClass
+from simulator.utils.structures import HashDict
 
 
-class OwnersHyperlinkField(serializers.HyperlinkedRelatedField):
+class OwnersRelatedField(serializers.RelatedField):
 
-    def use_pk_only_optimization(self):
+    default_error_messages = {
+        'does_not_exist': 'Invalid pk "{pk_value}" - object does not exist.',
+        'incorrect_type': 'Incorrect type, received {data_type}.'
+    }
+
+    def to_internal_value(self, incoming):
         """
-        Default value is True, and in this case we get "rest_framework.relations.PKOnlyObject", containing only pk,
-        instead of Owner model, which is not the behaviour we want.
+        Queryset with the instance we will store.
 
-        :return: False, to disable this behaviour.
+        :param incoming: instance with incoming data.
+        :return: queryset.
         """
-        return False
+        try:
+            return self.get_queryset().get(pk=incoming)
+        except ObjectDoesNotExist:
+            self.fail('does_not_exist', pk_value=incoming)
+        except (TypeError, ValueError):
+            self.fail('incorrect_type', data_type=type(incoming).__name__)
 
-    def get_url(self, obj, view_name, request, format):
+    def to_representation(self, outgoing):
         """
-        Overriding this method lets us set valid view_name and queryset, depending on handled object type field.
+        Custom HashDict() is used to satisfy django and get dict on view instead of simple String.
 
-        :param obj: Owner (or inheriting) model object.
-        :param view_name: name of the specific Owner view.
-        :param request: incoming request.
-        :param format: url format.
-        :return: modified data.
+        :param outgoing: instance we will take data from.
+        :return: instance we will send with outgoing's data.
         """
+        result = HashDict()
+        result['id'] = outgoing.pk
+        result['object_type'] = outgoing.owner_class_type
 
-        if obj.owner_class_type == OwnerClass.PHYSICAL_ENTITY.value:
-            view_name = 'physicalentity-detail'
-        elif obj.owner_class_type == OwnerClass.LEGAL_ENTITY.value:
-            view_name = 'legalentity-detail'
-
-        url_kwargs = {
-            'pk': obj.pk
-        }
-
-        return self.reverse(view_name, kwargs=url_kwargs, request=request, format=format)
-
-    def get_object(self, view_name, view_args, view_kwargs):
-        lookup_kwargs = {
-            'pk': view_kwargs['pk']
-        }
-        return self.get_queryset().get(**lookup_kwargs)
-
-    def to_internal_value(self, data):
-        """
-        Terrible solution. I should find something better.
-
-        :param data: incoming url.
-        :return: see overridden method.
-        """
-        if 'physical-entities' in data:
-            self.view_name = 'physicalentity-detail'
-        elif 'legal-entities' in data:
-            self.view_name = 'legalentity-detail'
-        super(OwnersHyperlinkField, self).to_internal_value(data)
+        return result
 
     def display_value(self, instance):
-        return '%s: %s' % (instance.owner_class_type, instance.pk)
+        """
+        Defines what choices user will see on view's form select element.
+
+        :param instance: instance object with data
+        :return: string with select's choice.
+        """
+        return 'OwnerID: %s' % instance.id
