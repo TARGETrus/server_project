@@ -13,8 +13,9 @@ DEAL_CLASS = {
 
 class Deal(models.Model):
     deal_class_type = models.CharField(choices=DEAL_CLASS, max_length=1, editable=False, default=DealClass.DEAL.value)
-    vendor = models.ForeignKey(Owner, related_name='deal', on_delete=models.PROTECT)
-    customer = models.ForeignKey(Owner, related_name='deal', on_delete=models.PROTECT)
+
+    vendor = models.ForeignKey(Owner, related_name='deal_vendor', on_delete=models.PROTECT)
+    customer = models.ForeignKey(Owner, related_name='deal_customer', on_delete=models.PROTECT)
     real_estate = models.ForeignKey(RealEstate, related_name='deal', on_delete=models.PROTECT)
 
 

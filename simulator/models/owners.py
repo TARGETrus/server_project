@@ -18,6 +18,7 @@ GENDER = (
 class Owner(models.Model):
     owner_class_type = models.CharField(choices=OWNER_CLASS, max_length=1, editable=False,
                                         default=OwnerClass.OWNER.value)
+
     phone_number = models.CharField(max_length=15, validators=[digit_regex])
     address_actual = models.CharField(max_length=200)
     address_registered = models.CharField(max_length=200)
