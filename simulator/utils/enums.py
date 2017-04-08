@@ -32,3 +32,9 @@ class RoomType(Enum):
 class PriceType(Enum):
     RENT = 'R'
     SALE = 'S'
+
+
+class DealClass(Enum):
+    DEAL = 'D'
+    RENT = 'R'
+    SALE = 'S'
