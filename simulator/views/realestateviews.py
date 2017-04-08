@@ -1,15 +1,7 @@
 from rest_framework import generics, permissions
 
-from simulator.models.realestate import RealEstate, Flat, Room
-from simulator.serializers.realestateserializers import RealEstateSerializer, FlatSerializer, RoomSerializer
-
-
-class RealEstateDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'put', 'patch', 'delete']
-
-    queryset = RealEstate.objects.all()
-    serializer_class = RealEstateSerializer
+from simulator.models.realestate import Flat, Room
+from simulator.serializers.realestateserializers import FlatSerializer, RoomSerializer
 
 
 class FlatList(generics.ListCreateAPIView):

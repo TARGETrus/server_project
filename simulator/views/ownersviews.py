@@ -1,15 +1,7 @@
 from rest_framework import generics, permissions
 
-from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
-from simulator.serializers.ownersserializers import OwnerSerializer, PhysicalEntitySerializer, LegalEntitySerializer
-
-
-class OwnerDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'put', 'patch', 'delete']
-
-    queryset = Owner.objects.all()
-    serializer_class = OwnerSerializer
+from simulator.models.owners import PhysicalEntity, LegalEntity
+from simulator.serializers.ownersserializers import PhysicalEntitySerializer, LegalEntitySerializer
 
 
 class PhysicalEntityList(generics.ListCreateAPIView):
