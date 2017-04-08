@@ -13,9 +13,6 @@ class FlatList(generics.ListCreateAPIView):
 
 
 class FlatDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a code snippet instance.
-    """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     http_method_names = ['get', 'put', 'patch', 'delete']
 
@@ -32,9 +29,6 @@ class RoomList(generics.ListCreateAPIView):
 
 
 class RoomDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a code snippet instance.
-    """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     http_method_names = ['get', 'put', 'patch', 'delete']
 

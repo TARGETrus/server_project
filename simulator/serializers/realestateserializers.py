@@ -7,10 +7,11 @@ from simulator.serializers.fields.ownersfields import OwnersRelatedField
 
 class RealEstateSerializer(serializers.HyperlinkedModelSerializer):
     owner = OwnersRelatedField(read_only=False, queryset=Owner.objects.all())
+    price = serializers.HyperlinkedRelatedField(view_name='price-detail', many=True, read_only=True)
 
     class Meta:
         model = RealEstate
-        fields = ('url', 'id', 'owner', 'for_rent')
+        fields = ('url', 'id', 'owner', 'price', 'for_rent')
 
 
 class FlatSerializer(RealEstateSerializer):

@@ -13,9 +13,6 @@ class PhysicalEntityList(generics.ListCreateAPIView):
 
 
 class PhysicalEntityDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a code snippet instance.
-    """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     http_method_names = ['get', 'put', 'patch', 'delete']
 
@@ -32,9 +29,6 @@ class LegalEntityList(generics.ListCreateAPIView):
 
 
 class LegalEntityDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve, update or delete a code snippet instance.
-    """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     http_method_names = ['get', 'put', 'patch', 'delete']
 
