@@ -15,13 +15,14 @@ class RealEstateRelatedField(serializers.RelatedField):
         """
         Queryset with the instance we will store.
 
-        :param incoming: instance with incoming data.
+        :param incoming: serialized dict instance with incoming data.
         :return: queryset.
         """
         try:
-            return self.get_queryset().get(pk=incoming)
+            incoming = eval(incoming)
+            return self.get_queryset().get(pk=incoming['id'])
         except ObjectDoesNotExist:
-            self.fail('does_not_exist', pk_value=incoming)
+            self.fail('does_not_exist', pk_value=incoming['id'])
         except (TypeError, ValueError):
             self.fail('incorrect_type', data_type=type(incoming).__name__)
 
@@ -45,4 +46,4 @@ class RealEstateRelatedField(serializers.RelatedField):
         :param instance: instance object with data
         :return: string with select's choice.
         """
-        return 'RealEstateID: %s' % instance.id
+        return 'RealEstateID: %s' % instance.pk
