@@ -24,6 +24,7 @@
                     {% else %}
                         <p><span class="text-info">Тип: </span>Неизвестный тип клиента</p>
                     {% endif %}
+                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' owner.id %}>Подробнее</a>
                 </div>
                 <div class="col-xs-4">
                     <p><span class="text-info">Номер телефона: </span>{{ owner.phone_number }}</p>

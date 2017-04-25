@@ -30,6 +30,7 @@
                             <span class="text-success">{{ price.price }}</span>р., установлена {{ price.established_date }}
                         {% endfor %}
                     </p>
+                    <a class="btn btn-success btn-lg" href={% url 'room-detail' room.id %}>Подробнее</a>
                 </div>
                 <div class="col-xs-4">
                     <p>

@@ -31,10 +31,12 @@
                         <p><span class="text-info">Тип недвижимости: </span>Квартира</p>
                         <p><span class="text-info">Этаж: </span>{{ real_estate.floor }}</p>
                         <p><span class="text-info">Описание: </span>{{ real_estate.description }}</p>
+                        <a class="btn btn-success btn-lg" href={% url 'flat-detail' real_estate.id %}>О квартире</a>
                     {% elif real_estate.real_estate_class_type == 'R' %}
                         <p><span class="text-info">Тип недвижимости: </span>Комната</p>
                         <p><span class="text-info">Площадь: </span>{{ real_estate.square }}</p>
                         <p><span class="text-info">Описание: </span>{{ real_estate.description }}</p>
+                        <a class="btn btn-success btn-lg" href={% url 'room-detail' real_estate.id %}>О квартире</a>
                     {% else %}
                         <p><span class="text-info">Тип недвижимости: </span>Неизвестный тип недвижимости</p>
                     {% endif %}
