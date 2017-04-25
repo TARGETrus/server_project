@@ -24,16 +24,6 @@
                         <p><span class="text-info">Количество комнат: </span>{{ flat.rooms_quantity }}</p>
                         <p><span class="text-info">Описание: </span>{{ flat.description }}</p>
                         <p><span class="text-info">Этаж: </span>{{ flat.floor }}</p>
-                        <p>
-                            <span class="text-info">Цена: </span>
-                            {% if flat.flat_type == 'R' %}
-                                Квартира
-                            {% elif flat.flat_type == 'S' %}
-                                Студия
-                            {% else %}
-                                Неизвестный тип квартиры
-                            {% endif %}
-                        </p>
                         <a class="btn btn-success btn-lg" href={{ flat.id }}>Подробнее</a>
                     </div>
                     <div class="col-xs-4">

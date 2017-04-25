@@ -24,6 +24,13 @@
                         </p>
                         <p><span class="text-info">Площадь: </span>{{ room.square }}</p>
                         <p><span class="text-info">Описание: </span>{{ room.description }}</p>
+                        <p>
+                            <span class="text-info">Цены: </span>
+                            {% for price in prices %}
+                                <br />
+                                <span class="text-success">{{ price.price }}</span>р., установлена {{ price.established_date }}
+                            {% endfor %}
+                        </p>
                     </div>
                     <div class="col-xs-4">
                         <p>
