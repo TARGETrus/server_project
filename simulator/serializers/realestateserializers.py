@@ -11,7 +11,7 @@ class RealEstateSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = RealEstate
-        fields = ('url', 'id', 'owner', 'price', 'for_rent')
+        fields = ('url', 'id', 'owner', 'price', 'for_rent', 'description')
 
 
 class FlatSerializer(RealEstateSerializer):
@@ -19,7 +19,7 @@ class FlatSerializer(RealEstateSerializer):
 
     class Meta(RealEstateSerializer.Meta):
         model = Flat
-        fields = RealEstateSerializer.Meta.fields + ('description', 'floor', 'flat_type', 'per_room_basis', 'new_build',
+        fields = RealEstateSerializer.Meta.fields + ('floor', 'flat_type', 'per_room_basis', 'new_build',
                                                      'rooms')
 
 
