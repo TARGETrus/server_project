@@ -6,7 +6,7 @@
             <div class="row tile_entity">
                 <div class="col-xs-4">
                     <a class="img-rounded" href={% url 'room-detail' room.id %}>
-                        <img src="/static/AQUILA.jpg" alt="Фото предложения" />
+                        <img src="/static/room.jpg" width="290px" alt="Фото предложения" />
                     </a>
                 </div>
                 <div class="col-xs-4">
@@ -31,7 +31,7 @@
                         <span class="text-info">Сдаётся: </span>
                         {% if room.for_rent %}
                             <span class="text-success">Да</span>
-                        {% else %}`
+                        {% else %}
                             <span class="text-danger">Нет</span>
                         {% endif %}
                     </p>
