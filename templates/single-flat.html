@@ -11,6 +11,9 @@
     </div>
 
     {% include 'chunks/entities/flat.html' %}
+    <h3>Комнаты:</h3>
     {% include 'chunks/entities/rooms.html' %}
+    <h3>Хозяин:</h3>
+    {% include 'chunks/entities/owner.html' with owner=flat.owner %}
 
 {% endblock %}
