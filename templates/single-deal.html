@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Deal Page{% endblock %}
+
+{% block pagecontent %}
+    <div class="jumbotron">
+        <h2>Подробная информация о сделке</h2>
+        <p>Ниже приведена детальная информация о сделке.</p>
+    </div>
+
+    {% include 'chunks/entities/deal.html' %}
+
+{% endblock %}

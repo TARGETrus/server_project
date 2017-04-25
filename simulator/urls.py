@@ -27,4 +27,10 @@ urlpatterns = [
     url(r'^rooms/(?P<pk>[0-9]+)/$',
         realestateviews.SingleRoomView.as_view(),
         name='room-detail'),
+    url(r'^deals/$',
+        dealsviews.AllDealsView.as_view(),
+        name='deal-list'),
+    url(r'^deals/(?P<pk>[0-9]+)/$',
+        dealsviews.SingleDealView.as_view(),
+        name='deal-detail'),
 ]

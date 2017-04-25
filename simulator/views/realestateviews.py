@@ -9,7 +9,9 @@ class AllFlatsView(TemplateView):
 
         flats = get_list_or_404(Flat)
 
-        context = {'flats': flats}
+        context = {
+            'flats': flats
+        }
 
         return render(request, 'flats-list.html', context)
 
@@ -21,7 +23,11 @@ class SingleFlatView(TemplateView):
         rooms = flat.rooms.all()
         prices = flat.price.get_rent_prices(flat.id) if flat.for_rent else flat.price.get_sell_prices(flat.id)
 
-        context = {'flat': flat, 'rooms': rooms, 'prices': prices}
+        context = {
+            'flat': flat,
+            'rooms': rooms,
+            'prices': prices
+        }
 
         return render(request, 'single-flat.html', context)
 
@@ -31,7 +37,9 @@ class AllRoomsView(TemplateView):
 
         rooms = get_list_or_404(Room)
 
-        context = {'rooms': rooms}
+        context = {
+            'rooms': rooms
+        }
 
         return render(request, 'rooms-list.html', context)
 
@@ -42,6 +50,9 @@ class SingleRoomView(TemplateView):
         room = get_object_or_404(Room, pk=kwargs.get('pk'))
         prices = room.price.get_rent_prices(room.id) if room.for_rent else room.price.get_sell_prices(room.id)
 
-        context = {'room': room, 'prices': prices}
+        context = {
+            'room': room,
+            'prices': prices
+        }
 
         return render(request, 'single-room.html', context)

@@ -1,0 +1,50 @@
+<!-- REQUIRES 'deal' object to be passed by using view -->
+<div class="container">
+    <div class='row'>
+        <div class="col-xs-12">
+            <div class="row tile_entity">
+                <div class="col-xs-4">
+                    {% if deal.vendor.owner_class_type == 'P' %}
+                        <p><span class="text-info">Тип клиента: </span>Физическое лицо</p>
+                    {% elif deal.vendor.owner_class_type == 'L' %}
+                        <p><span class="text-info">Тип клиента: </span>Юридическое лицо</p>
+                    {% else %}
+                        <p><span class="text-info">Тип клиента: </span>Неизвестный тип клиента</p>
+                    {% endif %}
+                    <p><span class="text-info">Телефон: </span>{{ deal.vendor.phone_number }}</p>
+                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' deal.vendor.id %}>Подробнее</a>
+                </div>
+                <div class="col-xs-4">
+                    {% if deal.deal_class_type == 'S' %}
+                        <p><span class="text-info">Тип сделки: </span>Продажа</p>
+                        <p><span class="text-info">Дата продажи: </span>{{ deal.deal_date }}</p>
+                    {% elif deal.deal_class_type == 'R' %}
+                        <p><span class="text-info">Тип сделки: </span>Аренда</p>
+                        <p><span class="text-info">С: </span>{{ deal.from_date }}</p>
+                        <p><span class="text-info">По: </span>{{ deal.till_date }}</p>
+                    {% else %}
+                        <p><span class="text-info">Тип сделки: </span>Неизвестный тип сделки</p>
+                    {% endif %}
+                    {% if deal.real_estate.real_estate_class_type == 'F' %}
+                        <p><span class="text-info">Тип недвижимости: </span>Квартира</p>
+                    {% elif deal.real_estate.real_estate_class_type == 'R' %}
+                        <p><span class="text-info">Тип недвижимости: </span>Комната</p>
+                    {% else %}
+                        <p><span class="text-info">Тип недвижимости: </span>Неизвестный тип недвижимости</p>
+                    {% endif %}
+                </div>
+                <div class="col-xs-4">
+                    {% if deal.customer.owner_class_type == 'P' %}
+                        <p><span class="text-info">Тип клиента: </span>Физическое лицо</p>
+                    {% elif deal.customer.owner_class_type == 'L' %}
+                        <p><span class="text-info">Тип клиента: </span>Юридическое лицо</p>
+                    {% else %}
+                        <p><span class="text-info">Тип клиента: </span>Неизвестный тип клиента</p>
+                    {% endif %}
+                    <p><span class="text-info">Телефон: </span>{{ deal.customer.phone_number }}</p>
+                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' deal.customer.id %}>Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

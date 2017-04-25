@@ -30,6 +30,8 @@ class SingleOwnerView(TemplateView):
         elif owner.owner_class_type == OwnerClass.LEGAL_ENTITY.value:
             owner = get_object_or_404(LegalEntity, pk=kwargs.get('pk'))
 
-        context = {'owner': owner}
+        context = {
+            'owner': owner
+        }
 
         return render(request, 'single-owner.html', context)
