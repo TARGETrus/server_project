@@ -1,0 +1,36 @@
+body {
+	padding-top: 50px;
+}
+
+.right_tile {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.tile_entity {
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+}
+
+.count {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.none {
+    display: none !important;
+}
+
+.jumbotron {
+    background-color: transparent;
+}
+
+.btn {
+    margin-top: 10px;
+}

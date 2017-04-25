@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Real estate client - {% block title %}{% endblock %}</title>
+        <script src="{% static 'js/react/react.js' %}"></script>
+        <script src="{% static 'js/react/react-dom.js' %}"></script>
+        <script src="{% static 'js/react/browser.min.js' %}"></script>
+        <script src="{% static 'js/jQuery/jquery-3.2.1.js' %}"></script>
+        <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
+        <script type="text/babel" src="{% static 'js/app.js' %}"></script>
+        {% block scripts %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap-theme.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}" />
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        {% include 'chunks/page_elements/nav.html' %}
+        <div class="container">
+            {% block pagecontent %}
+            {% endblock %}
+            {% include 'chunks/page_elements/footer.html' %}
+        </div>
+    </body>
+</html>

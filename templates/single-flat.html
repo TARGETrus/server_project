@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Flat Page{% endblock %}
+
+{% block pagecontent %}
+    <div class="jumbotron">
+        <h2>Подробная информация о квартире</h2>
+        <p>Ниже приведена детальная информация о квартире, доступной для продажи/найма.</p>
+    </div>
+
+    {% include 'chunks/entities/flat.html' %}
+
+{% endblock %}

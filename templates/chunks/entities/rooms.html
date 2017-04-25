@@ -1,0 +1,48 @@
+<!-- REQUIRES 'rooms' object to be passed by using view -->
+<div class="container">
+    <div class='row'>
+        {% for room in rooms %}
+        <div class="col-xs-12">
+            <div class="col-xs-12">
+                <div class="row tile_entity">
+                    <div class="col-xs-4">
+                        <a class="img-rounded" href={{ room.id }}>
+                            <img src="/static/AQUILA.jpg" alt="Фото предложения" />
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <p>
+                            <span class="text-info">Тип комнаты: </span>
+                            {% if room.room_type == 'L' %}
+                                Жилая
+                            {% elif room.room_type == 'B' %}
+                                Санузел
+                            {% elif room.room_type == 'K' %}
+                                Кухня
+                            {% else %}
+                                Неизвестный тип комнаты
+                            {% endif %}
+                        </p>
+                        <p><span class="text-info">Площадь: </span>{{ room.square }}</p>
+                        <p><span class="text-info">Описание: </span>{{ room.description }}</p>
+                        <a class="btn btn-success btn-lg" href={{ room.id }}>Подробнее</a>
+                    </div>
+                    <div class="col-xs-4">
+                        <p>
+                            <span class="text-info">Сдаётся: </span>
+                            {% if room.for_rent %}
+                                <span class="text-success">Да</span>
+                            {% else %}`
+                                <span class="text-danger">Нет</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <p class='count'>
+        <strong>Всего комнат: {{ rooms|length }}</strong>
+    </p>
+</div>

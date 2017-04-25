@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Rooms Page{% endblock %}
+
+{% block pagecontent %}
+    <div class="jumbotron">
+        <h2>Список комнат</h2>
+        <p>Ниже приведен список комнат, доступных для продажи/найма.</p>
+    </div>
+
+    {% include 'chunks/entities/rooms.html' %}
+
+{% endblock %}

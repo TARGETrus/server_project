@@ -1,36 +1,44 @@
-from rest_framework import generics, permissions
+from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.views.generic import TemplateView
 
 from simulator.models.realestate import Flat, Room
-from simulator.serializers.realestateserializers import FlatSerializer, RoomSerializer
 
 
-class FlatList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'post']
+class AllFlatsView(TemplateView):
+    def get(self, request, **kwargs):
 
-    queryset = Flat.objects.all()
-    serializer_class = FlatSerializer
+        flats = get_list_or_404(Flat)
 
+        context = {'flats': flats}
 
-class FlatDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'put', 'patch', 'delete']
-
-    queryset = Flat.objects.all()
-    serializer_class = FlatSerializer
+        return render(request, 'flats-list.html', context)
 
 
-class RoomList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'post']
+class SingleFlatView(TemplateView):
+    def get(self, request, **kwargs):
 
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
+        flat = get_object_or_404(Flat, pk=kwargs.get('pk'))
+
+        context = {'flat': flat}
+
+        return render(request, 'single-flat.html', context)
 
 
-class RoomDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'put', 'patch', 'delete']
+class AllRoomsView(TemplateView):
+    def get(self, request, **kwargs):
 
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
+        rooms = get_list_or_404(Room)
+
+        context = {'rooms': rooms}
+
+        return render(request, 'rooms-list.html', context)
+
+
+class SingleRoomView(TemplateView):
+    def get(self, request, **kwargs):
+
+        room = get_object_or_404(Room, pk=kwargs.get('pk'))
+
+        context = {'room': room}
+
+        return render(request, 'single-room.html', context)

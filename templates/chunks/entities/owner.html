@@ -1,0 +1,38 @@
+<!-- REQUIRES 'owner' object to be passed by using view -->
+<div class="container">
+    <div class='row'>
+        <div class="col-xs-12">
+            <div class="col-xs-12">
+                <div class="row tile_entity">
+                    <div class="col-xs-4">
+                        <img src="/static/AQUILA.jpg" alt="Фото предложения" />
+                    </div>
+                    <div class="col-xs-4">
+                        {% if owner.owner_class_type == 'P' %}
+                            <p><span class="text-info">Тип: </span>Физическое лицо</p>
+                            <p><span class="text-info">Имя: </span>{{ owner.first_name }}</p>
+                            <p><span class="text-info">Фамилия: </span>{{ owner.second_name }}</p>
+                            <p><span class="text-info">Отчество: </span>{{ owner.third_name }}</p>
+                            <p><span class="text-info">Пол: </span>{{ owner.gender }}</p>
+                            <p><span class="text-info">Дата рождения: </span>{{ owner.birth_date }}</p>
+                            <p><span class="text-info">Серия паспорта: </span>{{ owner.passport_series }}</p>
+                            <p><span class="text-info">Номер паспорта: </span>{{ owner.passport_number }}</p>
+                            <p><span class="text-info">Дата выдачи: </span>{{ owner.passport_issued_date }}</p>
+                        {% elif owner.owner_class_type == 'L' %}
+                            <p><span class="text-info">Тип: </span>Юридическое лицо</p>
+                            <p><span class="text-info">Название компании: </span>{{ owner.company_name }}</p>
+                            <p><span class="text-info">ИНН: </span>{{ owner.inn }}</p>
+                        {% else %}
+                            <p><span class="text-info">Тип: </span>Неизвестный тип клиента</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-4">
+                        <p><span class="text-info">Номер телефона: </span>{{ owner.phone_number }}</p>
+                        <p><span class="text-info">Фактический адрес: </span>{{ owner.address_actual }}</p>
+                        <p><span class="text-info">Адрес регистрации: </span>{{ owner.address_registered }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

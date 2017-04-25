@@ -1,36 +1,35 @@
-from rest_framework import generics, permissions
+from itertools import chain
 
-from simulator.models.owners import PhysicalEntity, LegalEntity
-from simulator.serializers.ownersserializers import PhysicalEntitySerializer, LegalEntitySerializer
+from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.views.generic import TemplateView
 
-
-class PhysicalEntityList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'post']
-
-    queryset = PhysicalEntity.objects.all()
-    serializer_class = PhysicalEntitySerializer
+from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
+from simulator.utils.enums import OwnerClass
 
 
-class PhysicalEntityDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'put', 'patch', 'delete']
+class AllOwnersView(TemplateView):
+    def get(self, request, **kwargs):
 
-    queryset = PhysicalEntity.objects.all()
-    serializer_class = PhysicalEntitySerializer
+        physical_entities = get_list_or_404(PhysicalEntity)
+        legal_entities = get_list_or_404(LegalEntity)
 
+        context = {
+            'owners': list(chain(physical_entities, legal_entities))
+        }
 
-class LegalEntityList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'post']
-
-    queryset = LegalEntity.objects.all()
-    serializer_class = LegalEntitySerializer
+        return render(request, 'owners-list.html', context)
 
 
-class LegalEntityDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    http_method_names = ['get', 'put', 'patch', 'delete']
+class SingleOwnerView(TemplateView):
+    def get(self, request, **kwargs):
 
-    queryset = LegalEntity.objects.all()
-    serializer_class = LegalEntitySerializer
+        owner = get_object_or_404(Owner, pk=kwargs.get('pk'))
+
+        if owner.owner_class_type == OwnerClass.PHYSICAL_ENTITY.value:
+            owner = get_object_or_404(PhysicalEntity, pk=kwargs.get('pk'))
+        elif owner.owner_class_type == OwnerClass.LEGAL_ENTITY.value:
+            owner = get_object_or_404(LegalEntity, pk=kwargs.get('pk'))
+
+        context = {'owner': owner}
+
+        return render(request, 'single-owner.html', context)

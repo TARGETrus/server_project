@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Owners Page{% endblock %}
+
+{% block pagecontent %}
+    <div class="jumbotron">
+        <h2>Список Клиентов</h2>
+        <p>Ниже приведен список клиентов компании.</p>
+    </div>
+
+    {% include 'chunks/entities/owners.html' %}
+
+{% endblock %}
