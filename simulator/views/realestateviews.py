@@ -18,9 +18,10 @@ class SingleFlatView(TemplateView):
     def get(self, request, **kwargs):
 
         flat = get_object_or_404(Flat, pk=kwargs.get('pk'))
+        rooms = flat.rooms.all()
         prices = flat.price.get_rent_prices(flat.id) if flat.for_rent else flat.price.get_sell_prices(flat.id)
 
-        context = {'flat': flat, 'prices': prices}
+        context = {'flat': flat, 'rooms': rooms, 'prices': prices}
 
         return render(request, 'single-flat.html', context)
 
