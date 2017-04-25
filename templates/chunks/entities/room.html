@@ -25,7 +25,7 @@
                     <p><span class="text-info">Описание: </span>{{ room.description }}</p>
                     <p>
                         <span class="text-info">Цены: </span>
-                        {% for price in prices %}
+                        {% for price in room_prices %}
                             <br />
                             <span class="text-success">{{ price.price }}</span>р., установлена {{ price.established_date }}
                         {% endfor %}

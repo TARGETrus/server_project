@@ -26,14 +26,17 @@
                     {% else %}
                         <p><span class="text-info">Тип сделки: </span>Неизвестный тип сделки</p>
                     {% endif %}
+                    <a class="btn btn-success btn-lg" href={% url 'deal-detail' deal.id %}>О сделке </a>
+                    <br />
                     {% if deal.real_estate.real_estate_class_type == 'F' %}
                         <p><span class="text-info">Тип недвижимости: </span>Квартира</p>
+                        <a class="btn btn-success btn-lg" href={% url 'flat-detail' deal.real_estate.id %}>О квартире</a>
                     {% elif deal.real_estate.real_estate_class_type == 'R' %}
                         <p><span class="text-info">Тип недвижимости: </span>Комната</p>
+                        <a class="btn btn-success btn-lg" href={% url 'room-detail' deal.real_estate.id %}>О квартире</a>
                     {% else %}
                         <p><span class="text-info">Тип недвижимости: </span>Неизвестный тип недвижимости</p>
                     {% endif %}
-                    <a class="btn btn-success btn-lg" href={% url 'deal-detail' deal.id %}>Подробнее</a>
                 </div>
                 <div class="col-xs-4">
                     {% if deal.customer.owner_class_type == 'P' %}

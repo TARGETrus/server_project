@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import TemplateView
 
 from simulator.models.deals import Deal, Sale, Rent
-from simulator.utils.enums import DealClass
+from simulator.utils.genericgetters import GenericGetters
 
 
 class AllDealsView(TemplateView):
@@ -23,15 +23,18 @@ class AllDealsView(TemplateView):
 class SingleDealView(TemplateView):
     def get(self, request, **kwargs):
 
-        deal = get_object_or_404(Deal, pk=kwargs.get('pk'))
-
-        if deal.deal_class_type == DealClass.SALE.value:
-            deal = get_object_or_404(Sale, pk=kwargs.get('pk'))
-        elif deal.deal_class_type == DealClass.RENT.value:
-            deal = get_object_or_404(Rent, pk=kwargs.get('pk'))
+        deal = GenericGetters.get_specific_deal(get_object_or_404(Deal, pk=kwargs.get('pk')))
+        vendor = GenericGetters.get_specific_owner(deal.vendor)
+        customer = GenericGetters.get_specific_owner(deal.customer)
+        real_estate = GenericGetters.get_specific_restate(deal.real_estate)
 
         context = {
-            'deal': deal
+            'deal': deal,
+            'vendor': vendor,
+            'customer': customer,
+            'real_estate': real_estate
         }
 
         return render(request, 'single-deal.html', context)
+
+

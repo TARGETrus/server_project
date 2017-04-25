@@ -1,4 +1,4 @@
-<!-- REQUIRES 'flat' object to be passed by using view -->
+<!-- REQUIRES 'flat', 'price' objects to be passed by using view -->
 <div class="container">
     <div class='row'>
         <div class="col-xs-12">
@@ -19,12 +19,12 @@
                             Неизвестный тип квартиры
                         {% endif %}
                     </p>
-                    <p><span class="text-info">Количество комнат: </span>{{ flat.rooms_quantity }}</p>
+                    <p><span class="text-info">Количество комнат: </span>{{ rooms|length }}</p>
                     <p><span class="text-info">Описание: </span>{{ flat.description }}</p>
                     <p><span class="text-info">Этаж: </span>{{ flat.floor }}</p>
                     <p>
                         <span class="text-info">Цены: </span>
-                        {% for price in prices %}
+                        {% for price in flat_prices %}
                             <br />
                             <span class="text-success">{{ price.price }}</span>р., установлена {{ price.established_date }}
                         {% endfor %}

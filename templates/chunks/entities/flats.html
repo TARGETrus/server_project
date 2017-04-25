@@ -20,7 +20,6 @@
                             Неизвестный тип квартиры
                         {% endif %}
                     </p>
-                    <p><span class="text-info">Количество комнат: </span>{{ flat.rooms_quantity }}</p>
                     <p><span class="text-info">Описание: </span>{{ flat.description }}</p>
                     <p><span class="text-info">Этаж: </span>{{ flat.floor }}</p>
                     <a class="btn btn-success btn-lg" href={% url 'flat-detail' flat.id %}>Подробнее</a>

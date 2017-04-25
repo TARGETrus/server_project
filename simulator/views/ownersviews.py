@@ -4,7 +4,9 @@ from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import TemplateView
 
 from simulator.models.owners import Owner, PhysicalEntity, LegalEntity
-from simulator.utils.enums import OwnerClass
+from simulator.models.realestate import Flat, Room
+from simulator.utils.enums import RealEstateClass
+from simulator.utils.genericgetters import GenericGetters
 
 
 class AllOwnersView(TemplateView):
@@ -23,15 +25,19 @@ class AllOwnersView(TemplateView):
 class SingleOwnerView(TemplateView):
     def get(self, request, **kwargs):
 
-        owner = get_object_or_404(Owner, pk=kwargs.get('pk'))
-
-        if owner.owner_class_type == OwnerClass.PHYSICAL_ENTITY.value:
-            owner = get_object_or_404(PhysicalEntity, pk=kwargs.get('pk'))
-        elif owner.owner_class_type == OwnerClass.LEGAL_ENTITY.value:
-            owner = get_object_or_404(LegalEntity, pk=kwargs.get('pk'))
+        owner = GenericGetters.get_specific_owner(get_object_or_404(Owner, pk=kwargs.get('pk')))
+        flats = []
+        rooms = []
+        for real_estate in owner.real_estate_property.all():
+            if real_estate.real_estate_class_type == RealEstateClass.FLAT.value:
+                flats.append(get_object_or_404(Flat, pk=real_estate.id))
+            elif real_estate.real_estate_class_type == RealEstateClass.ROOM.value:
+                rooms.append(get_object_or_404(Room, pk=real_estate.id))
 
         context = {
-            'owner': owner
+            'owner': owner,
+            'flats': flats,
+            'rooms': rooms
         }
 
         return render(request, 'single-owner.html', context)

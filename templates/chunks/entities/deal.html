@@ -6,13 +6,15 @@
                 <div class="col-xs-4">
                     {% if deal.vendor.owner_class_type == 'P' %}
                         <p><span class="text-info">Тип клиента: </span>Физическое лицо</p>
+                        <p><span class="text-info">Имя: </span>{{ vendor.first_name }}</p>
                     {% elif deal.vendor.owner_class_type == 'L' %}
                         <p><span class="text-info">Тип клиента: </span>Юридическое лицо</p>
+                        <p><span class="text-info">Название компании: </span>{{ vendor.company_name }}</p>
                     {% else %}
                         <p><span class="text-info">Тип клиента: </span>Неизвестный тип клиента</p>
                     {% endif %}
-                    <p><span class="text-info">Телефон: </span>{{ deal.vendor.phone_number }}</p>
-                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' deal.vendor.id %}>Подробнее</a>
+                    <p><span class="text-info">Телефон: </span>{{ vendor.phone_number }}</p>
+                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' vendor.id %}>Подробнее</a>
                 </div>
                 <div class="col-xs-4">
                     {% if deal.deal_class_type == 'S' %}
@@ -25,24 +27,30 @@
                     {% else %}
                         <p><span class="text-info">Тип сделки: </span>Неизвестный тип сделки</p>
                     {% endif %}
-                    {% if deal.real_estate.real_estate_class_type == 'F' %}
+                    {% if real_estate.real_estate_class_type == 'F' %}
                         <p><span class="text-info">Тип недвижимости: </span>Квартира</p>
-                    {% elif deal.real_estate.real_estate_class_type == 'R' %}
+                        <p><span class="text-info">Этаж: </span>{{ real_estate.floor }}</p>
+                        <p><span class="text-info">Описание: </span>{{ real_estate.description }}</p>
+                    {% elif real_estate.real_estate_class_type == 'R' %}
                         <p><span class="text-info">Тип недвижимости: </span>Комната</p>
+                        <p><span class="text-info">Площадь: </span>{{ real_estate.square }}</p>
+                        <p><span class="text-info">Описание: </span>{{ real_estate.description }}</p>
                     {% else %}
                         <p><span class="text-info">Тип недвижимости: </span>Неизвестный тип недвижимости</p>
                     {% endif %}
                 </div>
                 <div class="col-xs-4">
-                    {% if deal.customer.owner_class_type == 'P' %}
+                    {% if customer.owner_class_type == 'P' %}
                         <p><span class="text-info">Тип клиента: </span>Физическое лицо</p>
-                    {% elif deal.customer.owner_class_type == 'L' %}
+                        <p><span class="text-info">Имя: </span>{{ customer.first_name }}</p>
+                    {% elif customer.owner_class_type == 'L' %}
                         <p><span class="text-info">Тип клиента: </span>Юридическое лицо</p>
+                        <p><span class="text-info">Название компании: </span>{{ customer.company_name }}</p>
                     {% else %}
                         <p><span class="text-info">Тип клиента: </span>Неизвестный тип клиента</p>
                     {% endif %}
-                    <p><span class="text-info">Телефон: </span>{{ deal.customer.phone_number }}</p>
-                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' deal.customer.id %}>Подробнее</a>
+                    <p><span class="text-info">Телефон: </span>{{ customer.phone_number }}</p>
+                    <a class="btn btn-success btn-lg" href={% url 'owner-detail' customer.id %}>Подробнее</a>
                 </div>
             </div>
         </div>
