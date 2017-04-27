@@ -3,10 +3,14 @@ from itertools import chain
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import TemplateView
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from simulator.models.deals import Deal, Sale, Rent
 from simulator.utils.genericgetters import GenericGetters
 
 
+@method_decorator(login_required(login_url='/simulator/login/'), name='get')
 class AllDealsView(TemplateView):
     def get(self, request, **kwargs):
 
@@ -20,6 +24,7 @@ class AllDealsView(TemplateView):
         return render(request, 'deals-list.html', context)
 
 
+@method_decorator(login_required(login_url='/simulator/login/'), name='get')
 class SingleDealView(TemplateView):
     def get(self, request, **kwargs):
 
@@ -36,5 +41,3 @@ class SingleDealView(TemplateView):
         }
 
         return render(request, 'single-deal.html', context)
-
-

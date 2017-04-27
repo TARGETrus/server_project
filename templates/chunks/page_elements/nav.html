@@ -11,7 +11,17 @@
                 <li><a href="{% url 'room-list' %}">Комнаты</a></li>
                 <li><a href="{% url 'owner-list' %}">Клиенты</a></li>
                 <li><a href="{% url 'deal-list' %}">Сделки</a></li>
+                {% if user.is_authenticated and user.is_staff %}
+                    <li><a href="{% url 'admin:index' %}">Админ-панель</a></li>
+                {% endif %}
 			</ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}"><span class="text-warning">Привет, {{ user.username }}!&nbsp;</span> Выйти</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                {% endif %}
+            </ul>
 		</div>
 	</div>
 </nav>
