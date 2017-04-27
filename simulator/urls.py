@@ -10,7 +10,7 @@ urlpatterns = [
         {'template_name': 'login.html'},
         name='login'),
     url(r'^logout/$', auth_views.logout,
-        {'template_name': 'logged_out.html', 'next_page': '/simulator/login/'},
+        {'template_name': 'logout.html', 'next_page': '/simulator/login/'},
         name='logout'),
 
     url(r'^admin/', admin.site.urls),

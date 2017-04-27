@@ -1,5 +1,5 @@
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Сочетание имени пользователя и пароля не найдено.</p>
 {% endif %}
 
 {% if next %}
@@ -23,6 +23,6 @@
 </tr>
 </table>
 
-<input type="submit" class="btn-success btn-sm" value="Войти" />
+<input type="submit" class="btn btn-primary btn-default" value="Войти" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
