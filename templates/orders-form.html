@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Orders Form{% endblock %}
+
+{% block pagecontent %}
+    <div class="jumbotron">
+        <h2>Отправить Заявку</h2>
+        <p>Ниже приведена форма подачи заявок к специалистам компании.</p>
+    </div>
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Отправить</button>
+    </form>
+
+{% endblock %}

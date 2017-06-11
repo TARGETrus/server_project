@@ -6,9 +6,10 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="nav navbar-nav">
-				<li><a href="{% url 'index' %}">Домашняя страница</a></li>
+				<li><a href="{% url 'index' %}">Домашняя</a></li>
                 <li><a href="{% url 'flat-list' %}">Квартиры</a></li>
                 <li><a href="{% url 'room-list' %}">Комнаты</a></li>
+                <li><a href="{% url 'order-form' %}">Отправить заявку</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'owner-list' %}">Клиенты</a></li>
                     <li><a href="{% url 'deal-list' %}">Сделки</a></li>

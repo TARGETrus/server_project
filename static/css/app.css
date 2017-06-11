@@ -2,6 +2,15 @@ body {
 	padding-top: 50px;
 }
 
+label {
+    min-width: 140px;
+    vertical-align: top;
+}
+
+.container {
+    width: 1280px;
+}
+
 .right_tile {
     padding: 10px;
     border: 1px solid #ddd;

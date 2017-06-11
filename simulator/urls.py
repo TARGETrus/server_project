@@ -50,4 +50,8 @@ urlpatterns = [
     url(r'^orders/$',
         ordersviews.AllOrdersView.as_view(),
         name='order-list'),
+    url(r'^orders/form/$',
+        ordersviews.orderFormView,
+        name='order-form'),
+
 ]
