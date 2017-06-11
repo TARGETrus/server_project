@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Orders Page{% endblock %}
+
+{% block pagecontent %}
+    <div class="jumbotron">
+        <h2>Список Заявок</h2>
+        <p>Ниже приведен список заявок клиентов компании.</p>
+    </div>
+
+    {% include 'chunks/entities/orders.html' %}
+
+{% endblock %}

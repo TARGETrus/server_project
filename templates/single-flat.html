@@ -13,7 +13,9 @@
     {% include 'chunks/entities/flat.html' %}
     <h3>Комнаты:</h3>
     {% include 'chunks/entities/rooms.html' %}
-    <h3>Хозяин:</h3>
-    {% include 'chunks/entities/owner.html' %}
+    {% if user.is_authenticated %}
+        <h3>Хозяин:</h3>
+        {% include 'chunks/entities/owner.html' %}
+    {% endif %}
 
 {% endblock %}

@@ -1,6 +1,6 @@
 from itertools import chain
 
-from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
 
 from django.contrib.auth.decorators import login_required
@@ -14,8 +14,8 @@ from simulator.utils.genericgetters import GenericGetters
 class AllDealsView(TemplateView):
     def get(self, request, **kwargs):
 
-        sales = get_list_or_404(Sale)
-        rents = get_list_or_404(Rent)
+        sales = Sale.objects.all()
+        rents = Rent.objects.all()
 
         context = {
             'deals': list(chain(sales, rents))

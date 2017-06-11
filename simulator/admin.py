@@ -4,6 +4,7 @@ from simulator.models.owners import PhysicalEntity, LegalEntity
 from simulator.models.realestate import Flat, Room
 from simulator.models.prices import Price
 from simulator.models.deals import Sale, Rent
+from simulator.models.orders import Order
 
 
 class PhysicalEntityAdmin(admin.ModelAdmin):
@@ -62,6 +63,14 @@ class RentAdmin(admin.ModelAdmin):
         return 'Rent: ' + str(obj.id)
 
 
+class OrderAdmin(admin.ModelAdmin):
+    model = Order
+    list_display = ['get_name']
+
+    def get_name(self, obj):
+        return 'Order: ' + str(obj.id)
+
+
 admin.site.register(PhysicalEntity, PhysicalEntityAdmin)
 admin.site.register(LegalEntity, LegalEntityAdmin)
 admin.site.register(Flat, FlatAdmin)
@@ -69,3 +78,4 @@ admin.site.register(Room, RoomAdmin)
 admin.site.register(Price, PriceAdmin)
 admin.site.register(Sale, SaleAdmin)
 admin.site.register(Rent, RentAdmin)
+admin.site.register(Order, OrderAdmin)

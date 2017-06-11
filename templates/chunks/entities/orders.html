@@ -1,0 +1,19 @@
+<!-- REQUIRES 'orders' object to be passed by using view -->
+<div class="container">
+    <div class='row'>
+        {% for order in orders %}
+        <div class="col-xs-12">
+            <div class="row tile_entity">
+                <div class="col-xs-12">
+                        <p><span class="text-info">Имя клиента: </span>{{ order.client_name }}</p>
+                        <p><span class="text-info">Номер телефона: </span>{{ order.phone_number }}</p>
+                        <p><span class="text-info">Текст заявки: </span>{{ order.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <p class='count'>
+        <strong>Всего заявок: {{ orders|length }}</strong>
+    </p>
+</div>

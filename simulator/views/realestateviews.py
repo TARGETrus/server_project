@@ -1,18 +1,15 @@
-from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
 
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 
 from simulator.models.realestate import Flat, Room
 from simulator.utils.genericgetters import GenericGetters
 
 
-@method_decorator(login_required(login_url='/simulator/login/'), name='get')
 class AllFlatsView(TemplateView):
     def get(self, request, **kwargs):
 
-        flats = get_list_or_404(Flat)
+        flats = Flat.objects.all()
 
         context = {
             'flats': flats
@@ -21,7 +18,6 @@ class AllFlatsView(TemplateView):
         return render(request, 'flats-list.html', context)
 
 
-@method_decorator(login_required(login_url='/simulator/login/'), name='get')
 class SingleFlatView(TemplateView):
     def get(self, request, **kwargs):
 
@@ -41,11 +37,10 @@ class SingleFlatView(TemplateView):
         return render(request, 'single-flat.html', context)
 
 
-@method_decorator(login_required(login_url='/simulator/login/'), name='get')
 class AllRoomsView(TemplateView):
     def get(self, request, **kwargs):
 
-        rooms = get_list_or_404(Room)
+        rooms = Room.objects.all()
 
         context = {
             'rooms': rooms
@@ -54,7 +49,6 @@ class AllRoomsView(TemplateView):
         return render(request, 'rooms-list.html', context)
 
 
-@method_decorator(login_required(login_url='/simulator/login/'), name='get')
 class SingleRoomView(TemplateView):
     def get(self, request, **kwargs):
 

@@ -1,6 +1,6 @@
 from itertools import chain
 
-from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView
 
 from django.contrib.auth.decorators import login_required
@@ -16,8 +16,8 @@ from simulator.utils.genericgetters import GenericGetters
 class AllOwnersView(TemplateView):
     def get(self, request, **kwargs):
 
-        physical_entities = get_list_or_404(PhysicalEntity)
-        legal_entities = get_list_or_404(LegalEntity)
+        physical_entities = PhysicalEntity.objects.all()
+        legal_entities = LegalEntity.objects.all()
 
         context = {
             'owners': list(chain(physical_entities, legal_entities))

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from simulator.views import views, ownersviews, realestateviews, dealsviews
+from simulator.views import views, ownersviews, realestateviews, dealsviews, ordersviews
 
 
 urlpatterns = [
@@ -46,4 +46,8 @@ urlpatterns = [
     url(r'^deals/(?P<pk>[0-9]+)/$',
         dealsviews.SingleDealView.as_view(),
         name='deal-detail'),
+
+    url(r'^orders/$',
+        ordersviews.AllOrdersView.as_view(),
+        name='order-list'),
 ]
